@@ -1,6 +1,17 @@
+
 <div>
   <%= flash[:notice] %>
 </div>
+
+
+<% if @book.errors.any? %>
+  <%= @book.errors.count %>件のエラーが発生しました
+  <ul>
+    <% @book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
 
 <main>
     <div class= "container px-5 px-sm-0">
@@ -52,7 +63,7 @@
    <tr>
       <th>
           <%= link_to user_path(book.user.id) do %>
-          <%= image_tag @user.get_profile_image(100,100) %>
+          <%= image_tag book.user.get_profile_image(100,100) %>
           <% end %>
       </th>
      <th><%= link_to book.title,book_path(book.id) %></th>
